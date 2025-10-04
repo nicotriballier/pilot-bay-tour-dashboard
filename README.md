@@ -27,7 +27,7 @@ Made with ❤️ using [Anthropic APIs](https://www.anthropic.com/), [Next.js](h
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd my-app
+cd pilot-bay-tour-dashboard
 ```
 
 2. Install dependencies:
