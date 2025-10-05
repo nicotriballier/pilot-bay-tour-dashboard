@@ -107,13 +107,23 @@ bun start
 
 ## Deployment
 
-This app is configured to automatically deploy to Cloudflare Pages via GitHub Actions.
+This app is configured to automatically deploy to Cloudflare Pages.
 
 ### Setup Instructions
 
-Configure the [Cloudflare Github app](https://github.com/apps/cloudflare-workers-and-pages) in a few clicks
+1. **Install the Cloudflare GitHub App:**
+   - Go to [github.com/apps/cloudflare-workers-and-pages](https://github.com/apps/cloudflare-workers-and-pages)
+   - Click "Configure" and select your repository
 
-The deployment workflow runs on every push to the `main` branch and on pull requests.
+2. **Configure the build settings** in the Cloudflare dashboard:
+   - Build command: `npm run pages:build`
+   - Build output directory: `.open-next/worker`
+
+3. **Push to main branch:**
+   - Cloudflare will automatically detect changes and deploy
+   - Your app will be available at `https://pilot-bay-tour-dashboard.pages.dev`
+
+The deployment runs automatically on every push to the `main` branch.
 
 ## License
 

@@ -1,0 +1,6 @@
+{
+  "name": "pilot-bay-tour-dashboard",
+  "compatibility_date": "2025-10-04",
+  "pages_build_output_dir": ".open-next/worker",
+  "node_compat": true
+}
