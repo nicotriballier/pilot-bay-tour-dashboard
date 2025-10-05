@@ -116,10 +116,9 @@ This app is configured to automatically deploy to Cloudflare Pages.
    - Click "Configure" and select your repository
 
 2. **Configure the build settings** in the Cloudflare dashboard:
-   - Framework preset: `Next.js (Static HTML Export)`
+   - Framework preset: `Next.js`
    - Build command: `npm run pages:build`
-   - Build output directory: `.open-next/worker-cloudflare`
-   - **Deploy command:** Leave this as the default (Cloudflare handles deployment automatically)
+   - Build output directory: `.open-next`
 
 3. **Push to main branch:**
    - Cloudflare will automatically detect changes and deploy

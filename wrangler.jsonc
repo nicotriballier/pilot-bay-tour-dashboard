@@ -2,5 +2,5 @@
   "name": "nicopowered--pilot-bay-tour-dashboard",
   "compatibility_date": "2025-10-04",
   "compatibility_flags": ["nodejs_compat"],
-  "pages_build_output_dir": ".worker-next"
+  "pages_build_output_dir": ".open-next"
 }
