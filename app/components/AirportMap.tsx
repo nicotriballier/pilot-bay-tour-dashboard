@@ -111,16 +111,12 @@ export default function AirportMap() {
   }, []);
 
   return (
-    <div className="h-screen p-4">
-      <h1 className="text-3xl font-bold mb-4">Bay Area Airports</h1>
-
-      <div className="relative h-[calc(100%-4rem)] border-2 border-gray-300 rounded-lg overflow-hidden">
-        <MapComponent
-          airports={airportsWithWeather}
-          selectedAirport={selectedAirport}
-          onAirportSelect={setSelectedAirport}
-        />
-      </div>
+    <div className="h-screen w-screen">
+      <MapComponent
+        airports={airportsWithWeather}
+        selectedAirport={selectedAirport}
+        onAirportSelect={setSelectedAirport}
+      />
     </div>
   );
 }

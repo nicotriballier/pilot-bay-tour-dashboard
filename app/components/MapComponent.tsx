@@ -116,7 +116,7 @@ function CameraOverlay() {
               <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Sam's Chowder House / KHAF (North)</div>
               <img
                 src="https://cams.samschowderhouse.com/south.jpg?${Date.now()}"
-                style="width: 480px; height: 360px; border-radius: 4px; display: block;"
+                style="width: 432px; height: 324px; border-radius: 4px; display: block;"
                 alt="Camera feed North"
               />
             </div>
@@ -124,15 +124,15 @@ function CameraOverlay() {
               <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Sam's Chowder House / KHAF (South)</div>
               <img
                 src="https://cams.samschowderhouse.com/north.jpg?${Date.now()}"
-                style="width: 480px; height: 360px; border-radius: 4px; display: block;"
+                style="width: 432px; height: 324px; border-radius: 4px; display: block;"
                 alt="Camera feed South"
               />
             </div>
           </div>
         </div>
       `,
-      iconSize: [1008, 433],
-      iconAnchor: [1008, 216],
+      iconSize: [907, 390],
+      iconAnchor: [907, 195],
     });
 
     overlayRef.current = L.marker([SAMS_CHOWDER_HOUSE.lat, SAMS_CHOWDER_HOUSE.lon], {
@@ -157,7 +157,7 @@ function CameraOverlay() {
                   <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Sam's Chowder House / KHAF (North)</div>
                   <img
                     src="https://cams.samschowderhouse.com/south.jpg?${Date.now()}"
-                    style="width: 480px; height: 360px; border-radius: 4px; display: block;"
+                    style="width: 432px; height: 324px; border-radius: 4px; display: block;"
                     alt="Camera feed North"
                   />
                 </div>
@@ -165,15 +165,15 @@ function CameraOverlay() {
                   <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Sam's Chowder House / KHAF (South)</div>
                   <img
                     src="https://cams.samschowderhouse.com/north.jpg?${Date.now()}"
-                    style="width: 480px; height: 360px; border-radius: 4px; display: block;"
+                    style="width: 432px; height: 324px; border-radius: 4px; display: block;"
                     alt="Camera feed South"
                   />
                 </div>
               </div>
             </div>
           `,
-          iconSize: [1008, 433],
-          iconAnchor: [1008, 216],
+          iconSize: [907, 390],
+          iconAnchor: [907, 195],
         });
         overlayRef.current.setIcon(updatedIcon);
       }
@@ -208,8 +208,8 @@ function VideoOverlay() {
         ">
           <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Treasure Island</div>
           <iframe
-            width="768"
-            height="432"
+            width="691"
+            height="389"
             src="https://www.youtube.com/embed/BSWhGNXxT9A?autoplay=1&mute=1&loop=1&playlist=BSWhGNXxT9A"
             title="YouTube video player"
             frameBorder="0"
@@ -219,8 +219,8 @@ function VideoOverlay() {
           ></iframe>
         </div>
       `,
-      iconSize: [792, 516],
-      iconAnchor: [396, 258],
+      iconSize: [713, 464],
+      iconAnchor: [357, 232],
     });
 
     overlayRef.current = L.marker([TREASURE_ISLAND_VIDEO.lat, TREASURE_ISLAND_VIDEO.lon], {
@@ -256,13 +256,13 @@ function LawrenceHallOverlay() {
           <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Lawrence Hall of Science</div>
           <img
             src="https://www.ocf.berkeley.edu/~thelawrence/images/newview.jpg"
-            style="width: 480px; height: 360px; border-radius: 4px; display: block;"
+            style="width: 432px; height: 324px; border-radius: 4px; display: block;"
             alt="Lawrence Hall view"
           />
         </div>
       `,
-      iconSize: [504, 396],
-      iconAnchor: [252, 396],
+      iconSize: [454, 356],
+      iconAnchor: [227, 356],
     });
 
     overlayRef.current = L.marker([LAWRENCE_HALL.lat, LAWRENCE_HALL.lon], {

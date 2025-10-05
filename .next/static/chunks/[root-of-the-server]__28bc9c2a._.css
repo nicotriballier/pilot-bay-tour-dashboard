@@ -507,6 +507,10 @@
     min-height: 100vh;
   }
 
+  .w-screen {
+    width: 100vw;
+  }
+
   .overflow-hidden {
     overflow: hidden;
   }

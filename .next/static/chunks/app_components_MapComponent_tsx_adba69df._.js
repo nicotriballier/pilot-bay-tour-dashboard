@@ -69,14 +69,14 @@ function CameraOverlay() {
         "CameraOverlay.useEffect": ()=>{
             const cameraIcon = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$leaflet$2f$dist$2f$leaflet$2d$src$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].divIcon({
                 className: 'camera-image-overlay',
-                html: '\n        <div style="\n          background: white;\n          padding: 12px;\n          border-radius: 8px;\n          box-shadow: 0 4px 6px rgba(0,0,0,0.3);\n          border: 3px solid #10b981;\n        ">\n          <div style="display: flex; gap: 12px;">\n            <div>\n              <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Sam\'s Chowder House / KHAF (North)</div>\n              <img\n                src="https://cams.samschowderhouse.com/south.jpg?'.concat(Date.now(), '"\n                style="width: 480px; height: 360px; border-radius: 4px; display: block;"\n                alt="Camera feed North"\n              />\n            </div>\n            <div>\n              <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Sam\'s Chowder House / KHAF (South)</div>\n              <img\n                src="https://cams.samschowderhouse.com/north.jpg?').concat(Date.now(), '"\n                style="width: 480px; height: 360px; border-radius: 4px; display: block;"\n                alt="Camera feed South"\n              />\n            </div>\n          </div>\n        </div>\n      '),
+                html: '\n        <div style="\n          background: white;\n          padding: 12px;\n          border-radius: 8px;\n          box-shadow: 0 4px 6px rgba(0,0,0,0.3);\n          border: 3px solid #10b981;\n        ">\n          <div style="display: flex; gap: 12px;">\n            <div>\n              <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Sam\'s Chowder House / KHAF (North)</div>\n              <img\n                src="https://cams.samschowderhouse.com/south.jpg?'.concat(Date.now(), '"\n                style="width: 432px; height: 324px; border-radius: 4px; display: block;"\n                alt="Camera feed North"\n              />\n            </div>\n            <div>\n              <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Sam\'s Chowder House / KHAF (South)</div>\n              <img\n                src="https://cams.samschowderhouse.com/north.jpg?').concat(Date.now(), '"\n                style="width: 432px; height: 324px; border-radius: 4px; display: block;"\n                alt="Camera feed South"\n              />\n            </div>\n          </div>\n        </div>\n      '),
                 iconSize: [
-                    1008,
-                    433
+                    907,
+                    390
                 ],
                 iconAnchor: [
-                    1008,
-                    216
+                    907,
+                    195
                 ]
             });
             overlayRef.current = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$leaflet$2f$dist$2f$leaflet$2d$src$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].marker([
@@ -91,14 +91,14 @@ function CameraOverlay() {
                     if (overlayRef.current) {
                         const updatedIcon = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$leaflet$2f$dist$2f$leaflet$2d$src$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].divIcon({
                             className: 'camera-image-overlay',
-                            html: '\n            <div style="\n              background: white;\n              padding: 12px;\n              border-radius: 8px;\n              box-shadow: 0 4px 6px rgba(0,0,0,0.3);\n              border: 3px solid #10b981;\n            ">\n              <div style="display: flex; gap: 12px;">\n                <div>\n                  <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Sam\'s Chowder House / KHAF (North)</div>\n                  <img\n                    src="https://cams.samschowderhouse.com/south.jpg?'.concat(Date.now(), '"\n                    style="width: 480px; height: 360px; border-radius: 4px; display: block;"\n                    alt="Camera feed North"\n                  />\n                </div>\n                <div>\n                  <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Sam\'s Chowder House / KHAF (South)</div>\n                  <img\n                    src="https://cams.samschowderhouse.com/north.jpg?').concat(Date.now(), '"\n                    style="width: 480px; height: 360px; border-radius: 4px; display: block;"\n                    alt="Camera feed South"\n                  />\n                </div>\n              </div>\n            </div>\n          '),
+                            html: '\n            <div style="\n              background: white;\n              padding: 12px;\n              border-radius: 8px;\n              box-shadow: 0 4px 6px rgba(0,0,0,0.3);\n              border: 3px solid #10b981;\n            ">\n              <div style="display: flex; gap: 12px;">\n                <div>\n                  <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Sam\'s Chowder House / KHAF (North)</div>\n                  <img\n                    src="https://cams.samschowderhouse.com/south.jpg?'.concat(Date.now(), '"\n                    style="width: 432px; height: 324px; border-radius: 4px; display: block;"\n                    alt="Camera feed North"\n                  />\n                </div>\n                <div>\n                  <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Sam\'s Chowder House / KHAF (South)</div>\n                  <img\n                    src="https://cams.samschowderhouse.com/north.jpg?').concat(Date.now(), '"\n                    style="width: 432px; height: 324px; border-radius: 4px; display: block;"\n                    alt="Camera feed South"\n                  />\n                </div>\n              </div>\n            </div>\n          '),
                             iconSize: [
-                                1008,
-                                433
+                                907,
+                                390
                             ],
                             iconAnchor: [
-                                1008,
-                                216
+                                907,
+                                195
                             ]
                         });
                         overlayRef.current.setIcon(updatedIcon);
@@ -134,14 +134,14 @@ function VideoOverlay() {
         "VideoOverlay.useEffect": ()=>{
             const videoIcon = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$leaflet$2f$dist$2f$leaflet$2d$src$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].divIcon({
                 className: 'video-overlay',
-                html: '\n        <div style="\n          background: white;\n          padding: 12px;\n          border-radius: 8px;\n          box-shadow: 0 4px 6px rgba(0,0,0,0.3);\n          border: 3px solid #ef4444;\n        ">\n          <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Treasure Island</div>\n          <iframe\n            width="768"\n            height="432"\n            src="https://www.youtube.com/embed/BSWhGNXxT9A?autoplay=1&mute=1&loop=1&playlist=BSWhGNXxT9A"\n            title="YouTube video player"\n            frameBorder="0"\n            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"\n            allowFullScreen\n            style="border-radius: 4px; display: block;"\n          ></iframe>\n        </div>\n      ',
+                html: '\n        <div style="\n          background: white;\n          padding: 12px;\n          border-radius: 8px;\n          box-shadow: 0 4px 6px rgba(0,0,0,0.3);\n          border: 3px solid #ef4444;\n        ">\n          <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Treasure Island</div>\n          <iframe\n            width="691"\n            height="389"\n            src="https://www.youtube.com/embed/BSWhGNXxT9A?autoplay=1&mute=1&loop=1&playlist=BSWhGNXxT9A"\n            title="YouTube video player"\n            frameBorder="0"\n            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"\n            allowFullScreen\n            style="border-radius: 4px; display: block;"\n          ></iframe>\n        </div>\n      ',
                 iconSize: [
-                    792,
-                    516
+                    713,
+                    464
                 ],
                 iconAnchor: [
-                    396,
-                    258
+                    357,
+                    232
                 ]
             });
             overlayRef.current = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$leaflet$2f$dist$2f$leaflet$2d$src$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].marker([
@@ -178,14 +178,14 @@ function LawrenceHallOverlay() {
         "LawrenceHallOverlay.useEffect": ()=>{
             const lawrenceIcon = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$leaflet$2f$dist$2f$leaflet$2d$src$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].divIcon({
                 className: 'lawrence-image-overlay',
-                html: '\n        <div style="\n          background: white;\n          padding: 12px;\n          border-radius: 8px;\n          box-shadow: 0 4px 6px rgba(0,0,0,0.3);\n          border: 3px solid #f59e0b;\n        ">\n          <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Lawrence Hall of Science</div>\n          <img\n            src="https://www.ocf.berkeley.edu/~thelawrence/images/newview.jpg"\n            style="width: 480px; height: 360px; border-radius: 4px; display: block;"\n            alt="Lawrence Hall view"\n          />\n        </div>\n      ',
+                html: '\n        <div style="\n          background: white;\n          padding: 12px;\n          border-radius: 8px;\n          box-shadow: 0 4px 6px rgba(0,0,0,0.3);\n          border: 3px solid #f59e0b;\n        ">\n          <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Lawrence Hall of Science</div>\n          <img\n            src="https://www.ocf.berkeley.edu/~thelawrence/images/newview.jpg"\n            style="width: 432px; height: 324px; border-radius: 4px; display: block;"\n            alt="Lawrence Hall view"\n          />\n        </div>\n      ',
                 iconSize: [
-                    504,
-                    396
+                    454,
+                    356
                 ],
                 iconAnchor: [
-                    252,
-                    396
+                    227,
+                    356
                 ]
             });
             overlayRef.current = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$leaflet$2f$dist$2f$leaflet$2d$src$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].marker([
