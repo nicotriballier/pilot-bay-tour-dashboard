@@ -284,7 +284,7 @@ export default function MapComponent({ airports, selectedAirport, onAirportSelec
   return (
     <MapContainer
       center={[37.55, -122.2]}
-      zoom={10}
+      zoom={9.5}
       style={{ height: '100%', width: '100%' }}
       scrollWheelZoom={true}
     >
