@@ -36,7 +36,6 @@ const MapComponent = dynamic(() => import('./MapComponent'), { ssr: false });
 
 export default function AirportMap() {
   const [selectedAirport, setSelectedAirport] = useState('KSQL');
-  const [weather, setWeather] = useState<WeatherData>({});
   const [airportsWithWeather, setAirportsWithWeather] = useState(AIRPORTS);
 
   useEffect(() => {
@@ -58,7 +57,7 @@ export default function AirportMap() {
 
         // Update airports with weather data
         const updatedAirports = AIRPORTS.map(airport => {
-          const metar = data.find((m: any) => m.icaoId === airport.code);
+          const metar = data.find((m: { icaoId: string }) => m.icaoId === airport.code);
 
           if (metar) {
             console.log(`METAR for ${airport.code}:`, metar); // Debug log
@@ -110,15 +109,6 @@ export default function AirportMap() {
 
     return () => clearInterval(interval);
   }, []);
-
-  useEffect(() => {
-    const airport = airportsWithWeather.find(a => a.code === selectedAirport);
-    if (airport?.weather) {
-      setWeather(airport.weather);
-    }
-  }, [selectedAirport, airportsWithWeather]);
-
-  const selectedAirportData = airportsWithWeather.find(a => a.code === selectedAirport);
 
   return (
     <div className="h-screen p-4">

@@ -27,9 +27,6 @@ interface MapComponentProps {
   onAirportSelect: (code: string) => void;
 }
 
-// Treasure Island coordinates
-const TREASURE_ISLAND = { lat: 37.8267, lon: -122.3717 };
-
 // Sam's Chowder House camera location (5 miles northeast: ~0.0725 degrees north, ~0.0735 degrees east)
 const SAMS_CHOWDER_HOUSE = { lat: 37.2234, lon: -122.393 };
 
@@ -95,36 +92,6 @@ const createAirportIcon = (isSelected: boolean, code: string, name: string, weat
     iconSize: [120, 90],
     iconAnchor: [60, 45],
     popupAnchor: [0, -45],
-  });
-};
-
-// Custom icon for video marker
-const createVideoIcon = () => {
-  return L.divIcon({
-    className: 'custom-video-marker',
-    html: `
-      <div style="background: #ef4444; width: 30px; height: 30px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center;">
-        <span style="color: white; font-size: 16px;">▶</span>
-      </div>
-    `,
-    iconSize: [30, 30],
-    iconAnchor: [15, 15],
-    popupAnchor: [0, -15],
-  });
-};
-
-// Custom icon for camera marker
-const createCameraIcon = () => {
-  return L.divIcon({
-    className: 'custom-camera-marker',
-    html: `
-      <div style="background: #10b981; width: 30px; height: 30px; border-radius: 50%; border: 2px solid white; display: flex; align-items: center; justify-content: center;">
-        <span style="color: white; font-size: 16px;">📷</span>
-      </div>
-    `,
-    iconSize: [30, 30],
-    iconAnchor: [15, 15],
-    popupAnchor: [0, -15],
   });
 };
 
