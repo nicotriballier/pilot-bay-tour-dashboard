@@ -105,6 +105,16 @@ bun start
 - **OpenStreetMap** - Map tiles
 - **aviationweather.gov API** - Real-time METAR data
 
+## Deployment
+
+This app is configured to automatically deploy to Cloudflare Pages via GitHub Actions.
+
+### Setup Instructions
+
+Configure the [Cloudflare Github app](https://github.com/apps/cloudflare-workers-and-pages) in a few clicks
+
+The deployment workflow runs on every push to the `main` branch and on pull requests.
+
 ## License
 
 This project is open source and available under the MIT License.

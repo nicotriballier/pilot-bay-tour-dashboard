@@ -495,6 +495,10 @@
     margin-bottom: calc(var(--spacing) * 4);
   }
 
+  .contents {
+    display: contents;
+  }
+
   .h-\[calc\(100\%-4rem\)\] {
     height: calc(100% - 4rem);
   }
