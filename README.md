@@ -111,7 +111,7 @@ This app is configured to automatically deploy to Cloudflare Pages.
 
 ### Setup Instructions
 
-1. **Install the Cloudflare GitHub App:**
+1. **Install the Cloudflare GitHub App: **
    - Go to [github.com/apps/cloudflare-workers-and-pages](https://github.com/apps/cloudflare-workers-and-pages)
    - Click "Configure" and select your repository
 
