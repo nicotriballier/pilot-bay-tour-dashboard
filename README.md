@@ -107,24 +107,26 @@ bun start
 
 ## Deployment
 
-This app is configured to automatically deploy to Cloudflare Pages.
+This app is ready to deploy to Vercel with zero configuration.
 
-### Setup Instructions
+### Deploy to Vercel
 
-1. **Install the Cloudflare GitHub App: **
-   - Go to [github.com/apps/cloudflare-workers-and-pages](https://github.com/apps/cloudflare-workers-and-pages)
-   - Click "Configure" and select your repository
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/nicotriballier/pilot-bay-tour-dashboard)
 
-2. **Configure the build settings** in the Cloudflare dashboard:
-   - Framework preset: `Next.js`
-   - Build command: `npm run pages:build`
-   - Build output directory: `.open-next`
+**Or manually:**
 
-3. **Push to main branch:**
-   - Cloudflare will automatically detect changes and deploy
-   - Your app will be available at `https://pilot-bay-tour-dashboard.pages.dev`
+1. Go to [vercel.com](https://vercel.com) and sign in with GitHub
+2. Click "Add New Project"
+3. Import your repository
+4. Vercel will auto-detect Next.js - click "Deploy"
+5. Your app will be live at `https://your-project.vercel.app`
 
-The deployment runs automatically on every push to the `main` branch.
+Vercel automatically:
+- Detects the Next.js framework
+- Configures build settings
+- Deploys on every push to main
+- Provides preview deployments for PRs
+- Handles API routes and serverless functions
 
 ## License
 
