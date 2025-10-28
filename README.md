@@ -2,6 +2,8 @@
 
 As a pilot, I use this app to quickly see the weather conditions for bay tours. This interactive map displays real-time METAR weather data for airports across the San Francisco Bay Area, along with live camera feeds and video streams to help assess current flying conditions.
 
+Live app [pilot.nicopowered.com](https://pilot.nicopowered.com/)
+
 **Author:** Nico Triballier
 
 Made with ❤️ using [Anthropic APIs](https://www.anthropic.com/), [Next.js](https://nextjs.org), [OpenStreetMap](https://www.openstreetmap.org/), and [aviationweather.gov APIs](https://aviationweather.gov/)
