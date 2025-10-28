@@ -1,9 +1,11 @@
 {
-  "18952": {
-    "id": 18952,
+  "[project]/app/components/MapComponent.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/app/components/MapComponent.tsx [app-client] (ecmascript, next/dynamic entry)",
     "files": [
-      "static/chunks/915a76fc765b995b.js",
-      "static/chunks/c61f6267802e6bf3.css"
+      "static/chunks/node_modules_11cd6a26._.js",
+      "static/chunks/app_components_MapComponent_tsx_adba69df._.js",
+      "static/chunks/node_modules_leaflet_dist_leaflet_ef5f0413.css",
+      "static/chunks/app_components_MapComponent_tsx_c4e69a04._.js"
     ]
   }
 }

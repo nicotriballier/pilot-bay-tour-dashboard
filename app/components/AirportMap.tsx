@@ -12,13 +12,13 @@ interface WeatherData {
 }
 
 const AIRPORTS = [
-  { code: 'KSFO', name: 'San Francisco Intl', lat: 37.6213, lon: -122.3790, weather: { tempC: '18°C', wind: '290° 10kt', visibility: '10SM', conditions: 'Clear', fetchedDate: '2025-01-11' } },
-  { code: 'KOAK', name: 'Oakland Intl', lat: 37.7213, lon: -122.2200, weather: { tempC: '19°C', wind: '300° 8kt', visibility: '10SM', conditions: 'Clear', fetchedDate: '2025-01-11' } },
-  { code: 'KSJC', name: 'San Jose Intl', lat: 37.3639, lon: -121.9290, weather: { tempC: '20°C', wind: '320° 6kt', visibility: '10SM', conditions: 'Clear', fetchedDate: '2025-01-11' } },
-  { code: 'KSQL', name: 'San Carlos', lat: 37.5119, lon: -122.2500, weather: { tempC: '18°C', wind: '280° 8kt', visibility: '10SM', conditions: 'Clear', fetchedDate: '2025-01-11' } },
-  { code: 'KPAO', name: 'Palo Alto', lat: 37.4611, lon: -122.1150, weather: { tempC: '19°C', wind: '310° 7kt', visibility: '10SM', conditions: 'Clear', fetchedDate: '2025-01-11' } },
-  { code: 'KHWD', name: 'Hayward Executive', lat: 37.6592, lon: -122.1220, weather: { tempC: '18°C', wind: '290° 9kt', visibility: '10SM', conditions: 'Clear', fetchedDate: '2025-01-11' } },
-  { code: 'KHAF', name: 'Half Moon Bay', lat: 37.5134, lon: -122.5011, weather: { tempC: '16°C', wind: '310° 12kt', visibility: '10SM', conditions: 'Clear', fetchedDate: '2025-01-11' } },
+  { code: 'KSFO', name: 'San Francisco Intl', lat: 37.6213, lon: -122.3790 },
+  { code: 'KOAK', name: 'Oakland Intl', lat: 37.7213, lon: -122.2200 },
+  { code: 'KSJC', name: 'San Jose Intl', lat: 37.3639, lon: -121.9290 },
+  { code: 'KSQL', name: 'San Carlos', lat: 37.5119, lon: -122.2500 },
+  { code: 'KPAO', name: 'Palo Alto', lat: 37.4611, lon: -122.1150 },
+  { code: 'KHWD', name: 'Hayward Executive', lat: 37.6592, lon: -122.1220 },
+  { code: 'KHAF', name: 'Half Moon Bay', lat: 37.5134, lon: -122.5011 },
   { code: 'KLVK', name: 'Livermore', lat: 37.6934, lon: -121.8200 },
   { code: 'KCCR', name: 'Buchanan Field', lat: 37.9897, lon: -122.0569 },
   { code: 'KNUQ', name: 'Moffett Federal', lat: 37.4161, lon: -122.0494 },
@@ -37,6 +37,7 @@ const MapComponent = dynamic(() => import('./MapComponent'), { ssr: false });
 export default function AirportMap() {
   const [selectedAirport, setSelectedAirport] = useState('KSQL');
   const [airportsWithWeather, setAirportsWithWeather] = useState(AIRPORTS);
+  const [weatherError, setWeatherError] = useState<string | null>(null);
 
   useEffect(() => {
     // Fetch real weather data for all airports
@@ -48,9 +49,14 @@ export default function AirportMap() {
         );
 
         if (!response.ok) {
-          console.error('Failed to fetch weather data');
+          const errorMsg = `Failed to fetch weather data: ${response.status} ${response.statusText}`;
+          console.error(errorMsg);
+          setWeatherError(errorMsg);
           return;
         }
+
+        // Clear any previous errors
+        setWeatherError(null);
 
         const data = await response.json();
         console.log('METAR data:', data); // Debug log
@@ -63,15 +69,25 @@ export default function AirportMap() {
             console.log(`METAR for ${airport.code}:`, metar); // Debug log
 
             const tempC = metar.temp !== undefined ? `${Math.round(metar.temp)}°C` : 'N/A';
-            const wind = metar.wdir && metar.wspd
-              ? `${metar.wdir}° ${metar.wspd}kt`
-              : 'N/A';
+
+            // Handle different wind scenarios
+            let wind = 'N/A';
+            if (metar.wdir !== undefined && metar.wspd !== undefined) {
+              if (metar.wspd === 0) {
+                wind = 'No Wind';
+              } else if (metar.wdir === 'VRB') {
+                wind = `VRB ${metar.wspd}kt`;
+              } else {
+                wind = `${String(metar.wdir).padStart(3, '0')}° ${metar.wspd}kt`;
+              }
+            }
             const visibility = metar.visib !== undefined ? `${metar.visib}SM` : 'N/A';
             const conditions = metar.wxString || (metar.cldCvr1 ? metar.cldCvr1 : 'CLR');
 
             // Convert UTC to PST/PDT (obsTime is in seconds, not milliseconds)
             const obsDate = new Date(metar.obsTime * 1000);
 
+            // Get the formatted date with proper timezone abbreviation
             const fetchedDate = obsDate.toLocaleString('en-US', {
               timeZone: 'America/Los_Angeles',
               year: 'numeric',
@@ -79,8 +95,9 @@ export default function AirportMap() {
               day: '2-digit',
               hour: '2-digit',
               minute: '2-digit',
-              hour12: false
-            }) + ' PST';
+              hour12: false,
+              timeZoneName: 'short'
+            });
 
             return {
               ...airport,
@@ -99,7 +116,9 @@ export default function AirportMap() {
 
         setAirportsWithWeather(updatedAirports);
       } catch (error) {
-        console.error('Error fetching weather data:', error);
+        const errorMsg = `Error fetching weather data: ${error instanceof Error ? error.message : 'Unknown error'}`;
+        console.error(errorMsg);
+        setWeatherError(errorMsg);
       }
     };
 
@@ -111,7 +130,13 @@ export default function AirportMap() {
   }, []);
 
   return (
-    <div className="h-screen w-screen">
+    <div className="h-screen w-screen relative">
+      {weatherError && (
+        <div className="absolute top-4 left-4 z-[1000] bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded max-w-md">
+          <strong className="font-bold">Weather Error: </strong>
+          <span className="block sm:inline">{weatherError}</span>
+        </div>
+      )}
       <MapComponent
         airports={airportsWithWeather}
         selectedAirport={selectedAirport}
