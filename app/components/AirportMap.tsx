@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
+import VersionDisplay from './VersionDisplay';
 
 interface WeatherData {
   tempC?: string;
@@ -29,6 +30,9 @@ const AIRPORTS = [
   { code: 'KWVI', name: 'Watsonville', lat: 36.9357, lon: -121.7900 },
   { code: 'KMRY', name: 'Monterey Regional', lat: 36.5870, lon: -121.8429 },
   { code: 'KSMF', name: 'Sacramento Intl', lat: 38.6954, lon: -121.5908 },
+  { code: 'KTCY', name: 'Tracy Municipal', lat: 37.6889, lon: -121.4417 },
+  { code: 'KSCK', name: 'Stockton Metropolitan', lat: 37.8942, lon: -121.2383 },
+  { code: 'KMOD', name: 'Modesto City-County', lat: 37.6258, lon: -120.9544 },
 ];
 
 // Dynamically import the map component to avoid SSR issues
@@ -142,6 +146,7 @@ export default function AirportMap() {
         selectedAirport={selectedAirport}
         onAirportSelect={setSelectedAirport}
       />
+      <VersionDisplay />
     </div>
   );
 }
