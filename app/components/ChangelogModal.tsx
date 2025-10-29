@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { CHANGELOG, type ChangelogEntry } from '../data/changelog';
+import { CHANGELOG } from '../data/changelog';
 
 interface ChangelogModalProps {
   isOpen: boolean;

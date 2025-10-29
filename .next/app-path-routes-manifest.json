@@ -1,5 +1,6 @@
 {
   "/_not-found/page": "/_not-found",
+  "/api/image-metadata/route": "/api/image-metadata",
   "/api/weather/route": "/api/weather",
   "/favicon.ico/route": "/favicon.ico",
   "/page": "/"

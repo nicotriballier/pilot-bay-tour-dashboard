@@ -49,7 +49,7 @@ export async function GET(request: Request) {
 }
 
 // Simple EXIF data extraction function
-function extractExifData(buffer: Buffer): any {
+function extractExifData(buffer: Buffer): Record<string, string> | { error: string } {
   try {
     // Look for EXIF marker (0xFFE1) in JPEG
     const exifMarker = Buffer.from([0xFF, 0xE1]);
@@ -94,7 +94,7 @@ function extractExifData(buffer: Buffer): any {
       ? buffer.readUInt16LE(ifdStart)
       : buffer.readUInt16BE(ifdStart);
 
-    const exifData: any = {};
+    const exifData: Record<string, string> = {};
     
     // Parse directory entries
     for (let i = 0; i < numEntries; i++) {

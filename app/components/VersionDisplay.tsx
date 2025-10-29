@@ -119,9 +119,9 @@ Environment: ${buildInfo.environment}`;
                   setShowChangelog(true);
                 }}
                 className="text-xs text-green-600 hover:text-green-800 underline"
-                title="View changelog and what's new"
+                title="View changelog and what&apos;s new"
               >
-                What's New
+                What&apos;s New
               </button>
               <button
                 onClick={(e) => {

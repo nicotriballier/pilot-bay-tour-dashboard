@@ -12,7 +12,15 @@ interface WeatherData {
   fetchedDate?: string;
 }
 
-const AIRPORTS = [
+interface Airport {
+  code: string;
+  name: string;
+  lat: number;
+  lon: number;
+  weather?: WeatherData;
+}
+
+const AIRPORTS: Airport[] = [
   { code: 'KSFO', name: 'San Francisco Intl', lat: 37.6213, lon: -122.3790 },
   { code: 'KOAK', name: 'Oakland Intl', lat: 37.7213, lon: -122.2200 },
   { code: 'KSJC', name: 'San Jose Intl', lat: 37.3639, lon: -121.9290 },
