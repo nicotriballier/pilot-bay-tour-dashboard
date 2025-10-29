@@ -232,7 +232,7 @@ function MapComponent(param) {
                 url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             }, void 0, false, {
                 fileName: "[project]/app/components/MapComponent.tsx",
-                lineNumber: 291,
+                lineNumber: 292,
                 columnNumber: 7
             }, this),
             airports.map((airport)=>{
@@ -255,7 +255,7 @@ function MapComponent(param) {
                                     children: airport.code
                                 }, void 0, false, {
                                     fileName: "[project]/app/components/MapComponent.tsx",
-                                    lineNumber: 309,
+                                    lineNumber: 310,
                                     columnNumber: 17
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -263,45 +263,45 @@ function MapComponent(param) {
                                     children: airport.name
                                 }, void 0, false, {
                                     fileName: "[project]/app/components/MapComponent.tsx",
-                                    lineNumber: 310,
+                                    lineNumber: 311,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/components/MapComponent.tsx",
-                            lineNumber: 308,
+                            lineNumber: 309,
                             columnNumber: 15
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/app/components/MapComponent.tsx",
-                        lineNumber: 307,
+                        lineNumber: 308,
                         columnNumber: 13
                     }, this)
                 }, airport.code, false, {
                     fileName: "[project]/app/components/MapComponent.tsx",
-                    lineNumber: 298,
+                    lineNumber: 299,
                     columnNumber: 11
                 }, this);
             }),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(CameraOverlay, {}, void 0, false, {
                 fileName: "[project]/app/components/MapComponent.tsx",
-                lineNumber: 318,
+                lineNumber: 319,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(VideoOverlay, {}, void 0, false, {
                 fileName: "[project]/app/components/MapComponent.tsx",
-                lineNumber: 321,
+                lineNumber: 322,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(LawrenceHallOverlay, {}, void 0, false, {
                 fileName: "[project]/app/components/MapComponent.tsx",
-                lineNumber: 324,
+                lineNumber: 325,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/app/components/MapComponent.tsx",
-        lineNumber: 285,
+        lineNumber: 286,
         columnNumber: 5
     }, this);
 }

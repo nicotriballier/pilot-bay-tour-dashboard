@@ -53,9 +53,17 @@ export default function AirportMap() {
         );
 
         if (!response.ok) {
-          const errorMsg = `Failed to fetch weather data: ${response.status} ${response.statusText}`;
-          console.error(errorMsg);
-          setWeatherError(errorMsg);
+          // Try to get the detailed error message from the API response
+          try {
+            const errorData = await response.json();
+            const errorMsg = errorData.error || `Failed to fetch weather data: ${response.status} ${response.statusText}`;
+            console.error('Weather API error:', errorData);
+            setWeatherError(errorMsg);
+          } catch {
+            const errorMsg = `Failed to fetch weather data: ${response.status} ${response.statusText}`;
+            console.error(errorMsg);
+            setWeatherError(errorMsg);
+          }
           return;
         }
 
@@ -136,9 +144,12 @@ export default function AirportMap() {
   return (
     <div className="h-screen w-screen relative">
       {weatherError && (
-        <div className="absolute top-4 left-4 z-[1000] bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded max-w-md">
-          <strong className="font-bold">Weather Error: </strong>
-          <span className="block sm:inline">{weatherError}</span>
+        <div className="absolute top-4 left-4 z-[1000] bg-red-600 border-2 border-red-800 text-white px-6 py-4 rounded-lg shadow-lg max-w-lg">
+          <div className="flex items-center mb-2">
+            <span className="text-2xl mr-2">⚠️</span>
+            <strong className="font-bold text-lg">WEATHER DATA UNAVAILABLE</strong>
+          </div>
+          <div className="text-sm">{weatherError}</div>
         </div>
       )}
       <MapComponent

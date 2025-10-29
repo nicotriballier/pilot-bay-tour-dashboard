@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import ChangelogModal from './ChangelogModal';
 
 interface BuildInfo {
   version: string;
@@ -16,6 +17,7 @@ export default function VersionDisplay() {
   const [buildInfo, setBuildInfo] = useState<BuildInfo | null>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [showChangelog, setShowChangelog] = useState(false);
 
   useEffect(() => {
     // Fetch build info from public directory with cache-busting
@@ -110,19 +112,38 @@ Environment: ${buildInfo.environment}`;
               <div>Env: {buildInfo.environment}</div>
             </div>
             
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                handleCopyToClipboard();
-              }}
-              className="text-xs text-blue-600 hover:text-blue-800 underline mt-1"
-              title="Copy version info to clipboard"
-            >
-              Copy Info
-            </button>
+            <div className="flex space-x-3 mt-2">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowChangelog(true);
+                }}
+                className="text-xs text-green-600 hover:text-green-800 underline"
+                title="View changelog and what's new"
+              >
+                What's New
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCopyToClipboard();
+                }}
+                className="text-xs text-blue-600 hover:text-blue-800 underline"
+                title="Copy version info to clipboard"
+              >
+                Copy Info
+              </button>
+            </div>
           </div>
         )}
       </div>
+
+      {/* Changelog Modal */}
+      <ChangelogModal
+        isOpen={showChangelog}
+        onClose={() => setShowChangelog(false)}
+        currentVersion={buildInfo.version}
+      />
     </div>
   );
 }

@@ -3,9 +3,9 @@
     "id": "[project]/app/components/MapComponent.tsx [app-client] (ecmascript, next/dynamic entry)",
     "files": [
       "static/chunks/node_modules_11cd6a26._.js",
-      "static/chunks/app_components_MapComponent_tsx_adba69df._.js",
+      "static/chunks/app_3ec5099b._.js",
       "static/chunks/node_modules_leaflet_dist_leaflet_ef5f0413.css",
-      "static/chunks/app_components_MapComponent_tsx_a097fb8d._.js"
+      "static/chunks/app_components_MapComponent_tsx_fe9d1057._.js"
     ]
   }
 }

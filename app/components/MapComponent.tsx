@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useEffect, useRef } from 'react';
+import { useLawrenceHallImage } from '../hooks/useLawrenceHallImage';
 
 interface WeatherData {
   tempC?: string;
@@ -241,8 +242,84 @@ function VideoOverlay() {
 function LawrenceHallOverlay() {
   const map = useMap();
   const overlayRef = useRef<L.Marker | null>(null);
+  const { isValid, isLoading, error, imageDate, lastChecked } = useLawrenceHallImage();
 
   useEffect(() => {
+    // Remove existing marker if it exists
+    if (overlayRef.current) {
+      map.removeLayer(overlayRef.current);
+      overlayRef.current = null;
+    }
+
+    let content: string;
+    let borderColor: string;
+
+    if (isLoading) {
+      content = `
+        <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Lawrence Hall of Science</div>
+        <div style="
+          width: 432px;
+          height: 324px;
+          border-radius: 4px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #f3f4f6;
+          color: #6b7280;
+          font-size: 16px;
+        ">
+          🔄 Checking image date...
+        </div>
+      `;
+      borderColor = '#6b7280';
+    } else if (isValid) {
+      content = `
+        <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Lawrence Hall of Science</div>
+        <img
+          src="https://www.ocf.berkeley.edu/~thelawrence/images/newview.jpg?${Date.now()}"
+          style="width: 432px; height: 324px; border-radius: 4px; display: block;"
+          alt="Lawrence Hall view - Current"
+        />
+        <div style="font-size: 10px; color: #059669; margin-top: 4px;">
+          ✅ Current image (${imageDate ? new Date(imageDate).toLocaleDateString('en-US', { timeZone: 'America/Los_Angeles' }) : 'today'})
+        </div>
+      `;
+      borderColor = '#059669';
+    } else {
+      content = `
+        <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Lawrence Hall of Science</div>
+        <div style="
+          width: 432px;
+          height: 324px;
+          border-radius: 4px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          background: #fef2f2;
+          color: #dc2626;
+          font-size: 16px;
+          text-align: center;
+          padding: 20px;
+          box-sizing: border-box;
+        ">
+          <div style="font-size: 24px; margin-bottom: 12px;">📷</div>
+          <div style="font-weight: bold; margin-bottom: 8px;">No Current Picture Available</div>
+          ${error ? `
+            <div style="font-size: 12px; color: #7f1d1d;">
+              ${error}
+            </div>
+          ` : ''}
+          ${imageDate ? `
+            <div style="font-size: 10px; color: #991b1b; margin-top: 8px;">
+              Last image: ${new Date(imageDate).toLocaleDateString('en-US', { timeZone: 'America/Los_Angeles' })}
+            </div>
+          ` : ''}
+        </div>
+      `;
+      borderColor = '#dc2626';
+    }
+
     const lawrenceIcon = L.divIcon({
       className: 'lawrence-image-overlay',
       html: `
@@ -251,14 +328,9 @@ function LawrenceHallOverlay() {
           padding: 12px;
           border-radius: 8px;
           box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-          border: 3px solid #f59e0b;
+          border: 3px solid ${borderColor};
         ">
-          <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Lawrence Hall of Science</div>
-          <img
-            src="https://www.ocf.berkeley.edu/~thelawrence/images/newview.jpg"
-            style="width: 432px; height: 324px; border-radius: 4px; display: block;"
-            alt="Lawrence Hall view"
-          />
+          ${content}
         </div>
       `,
       iconSize: [454, 356],
@@ -274,7 +346,7 @@ function LawrenceHallOverlay() {
         map.removeLayer(overlayRef.current);
       }
     };
-  }, [map]);
+  }, [map, isValid, isLoading, error, imageDate, lastChecked]);
 
   return null;
 }
