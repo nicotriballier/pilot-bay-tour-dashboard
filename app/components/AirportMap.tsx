@@ -9,6 +9,7 @@ interface WeatherData {
   wind?: string;
   visibility?: string;
   conditions?: string;
+  ceiling?: string;
   fetchedDate?: string;
 }
 
@@ -88,21 +89,45 @@ export default function AirportMap() {
           if (metar) {
             console.log(`METAR for ${airport.code}:`, metar); // Debug log
 
-            const tempC = metar.temp !== undefined ? `${Math.round(metar.temp)}°C` : 'N/A';
+            // Only process if we have essential weather data - NO DEFAULTS
+            if (metar.temp === undefined || !metar.cover || metar.visib === undefined) {
+              console.log(`⚠️ Incomplete weather data for ${airport.code} - not displaying weather`);
+              return airport; // Return airport without weather data
+            }
 
-            // Handle different wind scenarios
-            let wind = 'N/A';
+            const tempC = `${Math.round(metar.temp)}°C`;
+            const visibility = `${metar.visib}SM`;
+            const conditions = metar.cover; // Use correct API field name
+
+            // Calculate ceiling from clouds array - only show actual ceilings (BKN/OVC)
+            let ceiling = '';
+            if (metar.clouds && Array.isArray(metar.clouds) && metar.clouds.length > 0) {
+              // Find the lowest ceiling (BKN or OVC layers only)
+              const ceilingLayers = metar.clouds.filter((cloud: { cover: string; base: number }) =>
+                cloud.cover === 'BKN' || cloud.cover === 'OVC'
+              );
+
+              if (ceilingLayers.length > 0) {
+                const lowestCeiling = Math.min(...ceilingLayers.map((cloud: { cover: string; base: number }) => cloud.base));
+                ceiling = `${lowestCeiling}ft ceiling`;
+              }
+              // If no ceiling layers (only FEW/SCT), don't show ceiling
+            }
+
+            // Handle wind - only if we have complete wind data
+            let wind;
             if (metar.wdir !== undefined && metar.wspd !== undefined) {
               if (metar.wspd === 0) {
-                wind = 'No Wind';
+                wind = 'No Wind'; // Real calm conditions
               } else if (metar.wdir === 'VRB') {
                 wind = `VRB ${metar.wspd}kt`;
               } else {
                 wind = `${String(metar.wdir).padStart(3, '0')}° ${metar.wspd}kt`;
               }
+            } else {
+              console.log(`⚠️ Incomplete wind data for ${airport.code} - not displaying weather`);
+              return airport; // Return airport without weather data
             }
-            const visibility = metar.visib !== undefined ? `${metar.visib}SM` : 'N/A';
-            const conditions = metar.wxString || (metar.cldCvr1 ? metar.cldCvr1 : 'CLR');
 
             // Convert UTC to PST/PDT (obsTime is in seconds, not milliseconds)
             const obsDate = new Date(metar.obsTime * 1000);
@@ -126,6 +151,7 @@ export default function AirportMap() {
                 wind,
                 visibility,
                 conditions,
+                ceiling,
                 fetchedDate
               }
             };

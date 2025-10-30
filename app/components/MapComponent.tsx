@@ -11,6 +11,7 @@ interface WeatherData {
   wind?: string;
   visibility?: string;
   conditions?: string;
+  ceiling?: string;
   fetchedDate?: string;
 }
 
@@ -62,10 +63,10 @@ const createAirportIcon = (isSelected: boolean, code: string, name: string, weat
       z-index: ${zIndex};
     ">
       <div style="color: #000; font-weight: bold; font-size: 10px; margin-bottom: 3px;">${code}</div>
-      <div style="color: #000; font-weight: bold;">${weather.tempC || 'N/A'}</div>
-      <div style="color: #666;">${weather.wind || 'N/A'}</div>
-      <div style="color: #666;">${weather.visibility || 'N/A'}</div>
-      <div style="color: ${conditionsColor}; font-weight: ${isClear ? 'normal' : 'bold'};">${weather.conditions || 'N/A'}</div>
+      <div style="color: #000; font-weight: bold;">${weather.tempC}</div>
+      <div style="color: #666;">${weather.wind}</div>
+      <div style="color: #666;">${weather.visibility}</div>
+      <div style="color: ${conditionsColor}; font-weight: ${isClear ? 'normal' : 'bold'};">${weather.conditions}${weather.ceiling ? ' ' + weather.ceiling : ''}</div>
       <div style="color: #999; font-size: 7px; margin-top: 2px;">${weather.fetchedDate || 'N/A'}</div>
     </div>
   ` : `
@@ -83,7 +84,7 @@ const createAirportIcon = (isSelected: boolean, code: string, name: string, weat
       z-index: ${zIndex};
     ">
       <div style="color: #000; font-weight: bold; font-size: 10px;">${code}</div>
-      <div style="color: #999; font-size: 8px;">Loading...</div>
+      <div style="color: #dc2626; font-size: 8px;">No Weather Data</div>
     </div>
   `;
 
