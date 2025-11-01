@@ -43,7 +43,9 @@ const LAWRENCE_HALL = { lat: 37.7325, lon: -122.065 };
 const createAirportIcon = (isSelected: boolean, code: string, name: string, weather?: WeatherData) => {
   const isClear = weather?.conditions?.toUpperCase().includes('CLR') ||
                   weather?.conditions?.toUpperCase().includes('CLEAR') ||
-                  weather?.conditions === 'CLR';
+                  weather?.conditions?.toUpperCase().includes('SKC') ||
+                  weather?.conditions === 'CLR' ||
+                  weather?.conditions === 'SKC';
   const conditionsColor = isClear ? '#666' : '#ef4444';
   const zIndex = isSelected ? '1000' : 'auto';
 
@@ -63,7 +65,12 @@ const createAirportIcon = (isSelected: boolean, code: string, name: string, weat
       z-index: ${zIndex};
     ">
       <div style="color: #000; font-weight: bold; font-size: 10px; margin-bottom: 3px;">${code}</div>
-      <div style="color: #000; font-weight: bold;">${weather.tempC}</div>
+      <div style="color: #000;">
+        ${weather.tempC && weather.tempC.includes('(')
+          ? `<span style="font-weight: bold;">${weather.tempC.split('(')[0]}</span><span style="font-weight: normal;">(${weather.tempC.split('(')[1]}</span>`
+          : `<span style="font-weight: bold;">${weather.tempC || 'N/A'}</span>`
+        }
+      </div>
       <div style="color: #666;">${weather.wind}</div>
       <div style="color: #666;">${weather.visibility}</div>
       <div style="color: ${conditionsColor}; font-weight: ${isClear ? 'normal' : 'bold'};">${weather.conditions}${weather.ceiling ? ' ' + weather.ceiling : ''}</div>

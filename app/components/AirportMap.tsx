@@ -95,7 +95,10 @@ export default function AirportMap() {
               return airport; // Return airport without weather data
             }
 
-            const tempC = `${Math.round(metar.temp)}°C`;
+            // Format temperature with dew point if available
+            const tempC = metar.dewp !== undefined
+              ? `${Math.round(metar.temp)}°C (${Math.round(metar.dewp)}°C dew point)`
+              : `${Math.round(metar.temp)}°C`;
             const visibility = `${metar.visib}SM`;
             const conditions = metar.cover; // Use correct API field name
 

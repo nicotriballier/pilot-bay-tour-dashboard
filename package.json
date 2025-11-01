@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "npm run generate-build-info && next dev --turbopack",
-    "build": "npm run generate-build-info && next build --turbopack",
+    "build": "npm run generate-build-info && next build",
     "start": "next start",
     "lint": "eslint",
     "generate-build-info": "node scripts/generate-build-info.js"
