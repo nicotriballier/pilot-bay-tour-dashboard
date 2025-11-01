@@ -8,6 +8,7 @@ interface WeatherData {
   tempC?: string;
   wind?: string;
   visibility?: string;
+  visibilityColor?: string;
   conditions?: string;
   ceiling?: string;
   fetchedDate?: string;
@@ -100,6 +101,7 @@ export default function AirportMap() {
               ? `${Math.round(metar.temp)}°C (${Math.round(metar.dewp)}°C dew point)`
               : `${Math.round(metar.temp)}°C`;
             const visibility = `${metar.visib}SM`;
+            const visibilityColor = metar.visib < 10 ? '#ef4444' : '#666'; // Red if under 10SM, gray otherwise
             const conditions = metar.cover; // Use correct API field name
 
             // Calculate ceiling from clouds array - only show actual ceilings (BKN/OVC)
@@ -153,6 +155,7 @@ export default function AirportMap() {
                 tempC,
                 wind,
                 visibility,
+                visibilityColor,
                 conditions,
                 ceiling,
                 fetchedDate
