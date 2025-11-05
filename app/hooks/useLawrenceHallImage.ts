@@ -37,6 +37,7 @@ export function useLawrenceHallImage(): ImageValidationResult {
         }
 
         const data = await response.json();
+        console.log('🔍 Image metadata:', data);
         
         if (!isMounted) return;
 

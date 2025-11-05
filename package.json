@@ -3,7 +3,7 @@
   "version": "1.2.0",
   "private": true,
   "scripts": {
-    "dev": "npm run generate-build-info && next dev --turbopack",
+    "dev": "npm run generate-build-info && next dev",
     "build": "npm run generate-build-info && next build",
     "start": "next start",
     "lint": "eslint",
