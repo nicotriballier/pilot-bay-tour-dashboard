@@ -10,7 +10,7 @@ interface WeatherData {
   visibility?: string;
   visibilityColor?: string;
   conditions?: string;
-  ceiling?: string;
+  cloudLayers?: string;
   fetchedDate?: string;
 }
 
@@ -104,19 +104,16 @@ export default function AirportMap() {
             const visibilityColor = metar.visib < 10 ? '#ef4444' : '#666'; // Red if under 10SM, gray otherwise
             const conditions = metar.cover; // Use correct API field name
 
-            // Calculate ceiling from clouds array - only show actual ceilings (BKN/OVC)
-            let ceiling = '';
+            // Format cloud layers from clouds array - one per line
+            let cloudLayers = '';
             if (metar.clouds && Array.isArray(metar.clouds) && metar.clouds.length > 0) {
-              // Find the lowest ceiling (BKN or OVC layers only)
-              const ceilingLayers = metar.clouds.filter((cloud: { cover: string; base: number }) =>
-                cloud.cover === 'BKN' || cloud.cover === 'OVC'
-              );
-
-              if (ceilingLayers.length > 0) {
-                const lowestCeiling = Math.min(...ceilingLayers.map((cloud: { cover: string; base: number }) => cloud.base));
-                ceiling = `${lowestCeiling}ft ceiling`;
-              }
-              // If no ceiling layers (only FEW/SCT), don't show ceiling
+              cloudLayers = metar.clouds
+                .map((cloud: { cover: string; base: number }) => {
+                  // Format base altitude with thousands separator
+                  const formattedBase = cloud.base.toLocaleString('en-US');
+                  return `${cloud.cover} ${formattedBase} ft`;
+                })
+                .join('<br/>');
             }
 
             // Handle wind - only if we have complete wind data
@@ -157,7 +154,7 @@ export default function AirportMap() {
                 visibility,
                 visibilityColor,
                 conditions,
-                ceiling,
+                cloudLayers,
                 fetchedDate
               }
             };
@@ -180,6 +177,8 @@ export default function AirportMap() {
 
     return () => clearInterval(interval);
   }, []);
+
+  console.log("airportsWithWeather:", airportsWithWeather);
 
   return (
     <div className="h-screen w-screen relative">

@@ -12,7 +12,7 @@ interface WeatherData {
   visibility?: string;
   visibilityColor?: string;
   conditions?: string;
-  ceiling?: string;
+  cloudLayers?: string;
   fetchedDate?: string;
 }
 
@@ -74,7 +74,7 @@ const createAirportIcon = (isSelected: boolean, code: string, name: string, weat
       </div>
       <div style="color: #666;">${weather.wind}</div>
       <div style="color: ${weather.visibilityColor || '#666'};">${weather.visibility}</div>
-      <div style="color: ${conditionsColor}; font-weight: ${isClear ? 'normal' : 'bold'};">${weather.conditions}${weather.ceiling ? ' ' + weather.ceiling : ''}</div>
+      ${weather.cloudLayers ? `<div style="color: #ef4444; font-size: 8px; margin-top: 2px; line-height: 1.3;">${weather.cloudLayers}</div>` : ''}
       <div style="color: #999; font-size: 7px; margin-top: 2px;">${weather.fetchedDate || 'N/A'}</div>
     </div>
   ` : `
