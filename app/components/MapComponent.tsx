@@ -251,7 +251,7 @@ function VideoOverlay() {
 function LawrenceHallOverlay() {
   const map = useMap();
   const overlayRef = useRef<L.Marker | null>(null);
-  const { isValid, isLoading, error, imageDate, lastChecked } = useLawrenceHallImage();
+  const { isValid, isLoading, error, imageDate, lastChecked, imageDataUrl } = useLawrenceHallImage();
 
   useEffect(() => {
     // Remove existing marker if it exists
@@ -281,11 +281,11 @@ function LawrenceHallOverlay() {
         </div>
       `;
       borderColor = '#6b7280';
-    } else if (isValid) {
+    } else if (isValid && imageDataUrl) {
       content = `
         <div style="font-weight: bold; margin-bottom: 6px; font-size: 14px;">Lawrence Hall of Science</div>
         <img
-          src="https://www.ocf.berkeley.edu/~thelawrence/images/newview.jpg?${Date.now()}"
+          src="${imageDataUrl}"
           style="width: 432px; height: 324px; border-radius: 4px; display: block;"
           alt="Lawrence Hall view - Current"
         />

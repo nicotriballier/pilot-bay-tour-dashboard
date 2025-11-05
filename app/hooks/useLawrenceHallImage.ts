@@ -6,6 +6,7 @@ interface ImageValidationResult {
   error: string | null;
   imageDate: string | null;
   lastChecked: string | null;
+  imageDataUrl: string | null;
 }
 
 const LAWRENCE_HALL_IMAGE_URL = 'https://www.ocf.berkeley.edu/~thelawrence/images/newview.jpg';
@@ -18,6 +19,7 @@ export function useLawrenceHallImage(): ImageValidationResult {
     error: null,
     imageDate: null,
     lastChecked: null,
+    imageDataUrl: null,
   });
 
   useEffect(() => {
@@ -56,6 +58,7 @@ export function useLawrenceHallImage(): ImageValidationResult {
             error: 'No date information available in image',
             imageDate: null,
             lastChecked: new Date().toISOString(),
+            imageDataUrl: data.imageDataUrl || null,
           });
           return;
         }
@@ -78,6 +81,7 @@ export function useLawrenceHallImage(): ImageValidationResult {
           error: null,
           imageDate: parsedDate.toISOString(),
           lastChecked: new Date().toISOString(),
+          imageDataUrl: data.imageDataUrl || null,
         });
 
       } catch (error) {
@@ -91,6 +95,7 @@ export function useLawrenceHallImage(): ImageValidationResult {
           error: error instanceof Error ? error.message : 'Unknown error',
           imageDate: null,
           lastChecked: new Date().toISOString(),
+          imageDataUrl: null,
         });
       }
     };

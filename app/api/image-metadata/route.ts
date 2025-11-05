@@ -34,6 +34,7 @@ export async function GET(request: Request) {
       success: true,
       exif: exifData,
       imageSize: buffer.length,
+      imageDataUrl: `data:image/jpeg;base64,${buffer.toString('base64')}`,
       timestamp: new Date().toISOString()
     });
 
