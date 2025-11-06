@@ -12,6 +12,7 @@ interface WeatherData {
   conditions?: string;
   cloudLayers?: string;
   fetchedDate?: string;
+  flightCategory?: string;
 }
 
 interface Airport {
@@ -52,6 +53,34 @@ export default function AirportMap() {
   const [selectedAirport, setSelectedAirport] = useState('KSQL');
   const [airportsWithWeather, setAirportsWithWeather] = useState(AIRPORTS);
   const [weatherError, setWeatherError] = useState<string | null>(null);
+
+  //adds a vis filter state, so we re-render the map whenever a filter on flight visibility is changed
+  const [selectedVisFilters, setSelectedVisFilters] = useState({
+    VFR:true,
+    MVFR:true,
+    IFR:true,
+    LIFR:true
+  });
+
+  // Handler to toggle Vis Filters
+  const handleVisFilterChange = (category: string) => {
+    console.log("you tried to change the vis filter");
+    setSelectedVisFilters(prev => {
+      const newState = {
+        ...prev,
+        [category]: !prev[category as keyof typeof prev]  // Tell TypeScript it's safe. Can be read as !prev[category]
+      };
+      console.log("NEW filters:", newState); // Shows the new filter values
+      return newState;
+    });
+  };
+
+    // FILTER AIRPORTS based on selected filters
+  const filteredAirports = airportsWithWeather.filter(airport => {
+    if (!airport.weather?.flightCategory) return true; // Show if no category
+    return selectedVisFilters[airport.weather.flightCategory as keyof typeof selectedVisFilters];
+  });
+
 
   useEffect(() => {
     // Fetch real weather data for all airports
@@ -115,6 +144,8 @@ export default function AirportMap() {
                 })
                 .join('<br/>');
             }
+            // Flight Categories VFR / MVFR
+            let flightCategory = metar.fltCat;
 
             // Handle wind - only if we have complete wind data
             let wind;
@@ -155,14 +186,15 @@ export default function AirportMap() {
                 visibilityColor,
                 conditions,
                 cloudLayers,
-                fetchedDate
+                fetchedDate,
+                flightCategory
               }
             };
           }
 
           return airport;
         });
-
+        
         setAirportsWithWeather(updatedAirports);
       } catch (error) {
         const errorMsg = `Error fetching weather data: ${error instanceof Error ? error.message : 'Unknown error'}`;
@@ -179,6 +211,9 @@ export default function AirportMap() {
   }, []);
 
   console.log("airportsWithWeather:", airportsWithWeather);
+  //- VFR: ≥3000ft ceiling, ≥5SM visibility
+  //- MVFR: 1000-3000ft ceiling or 3-5SM visibility
+  //- IFR: <1000ft ceiling or <3SM visibility
 
   return (
     <div className="h-screen w-screen relative">
@@ -191,8 +226,49 @@ export default function AirportMap() {
           <div className="text-sm">{weatherError}</div>
         </div>
       )}
+
+      {/* show updated vis filter bar */}
+      <div>
+        <label>Flight Vis Filters: </label>&nbsp; &nbsp;
+        <label>VFR &nbsp;
+        <input
+          style={{ backgroundColor: 'red' }}
+          type="checkbox"
+          checked={selectedVisFilters.VFR}
+          onChange={() => handleVisFilterChange('VFR')}
+        />
+        </label> &nbsp; &nbsp;
+
+        <label>MVFR &nbsp;
+        <input
+          style={{ backgroundColor: 'red' }}
+          type="checkbox"
+          checked={selectedVisFilters.MVFR}
+          onChange={() => handleVisFilterChange('MVFR')}
+        />
+        </label> &nbsp; &nbsp;
+
+        <label>IFR &nbsp;
+        <input
+          style={{ backgroundColor: 'red' }}
+          type="checkbox"
+          checked={selectedVisFilters.IFR}
+          onChange={() => handleVisFilterChange('IFR')}
+        />
+        </label> &nbsp; &nbsp;
+
+        <label>LIFR &nbsp;
+        <input
+          style={{ backgroundColor: 'red' }}
+          type="checkbox"
+          checked={selectedVisFilters.LIFR}
+          onChange={() => handleVisFilterChange('LIFR')}
+        />
+        </label>
+        
+      </div>
       <MapComponent
-        airports={airportsWithWeather}
+        airports={filteredAirports}
         selectedAirport={selectedAirport}
         onAirportSelect={setSelectedAirport}
       />

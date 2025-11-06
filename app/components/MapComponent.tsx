@@ -14,6 +14,7 @@ interface WeatherData {
   conditions?: string;
   cloudLayers?: string;
   fetchedDate?: string;
+  flightCategory?: string;
 }
 
 interface Airport {
