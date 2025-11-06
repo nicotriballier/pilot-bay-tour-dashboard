@@ -10,6 +10,7 @@
     "generate-build-info": "node scripts/generate-build-info.js"
   },
   "dependencies": {
+    "@auth0/nextjs-auth0": "^4.11.1",
     "@types/leaflet": "^1.9.20",
     "@vercel/speed-insights": "^1.2.0",
     "exif-js": "^2.3.0",

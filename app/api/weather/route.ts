@@ -1,5 +1,14 @@
 import { NextResponse } from 'next/server';
 
+// In-memory cache with timestamps
+interface CacheEntry {
+  data: any;
+  timestamp: number;
+}
+
+const weatherCache = new Map<string, CacheEntry>();
+const CACHE_DURATION = 2 * 60 * 1000; // 2 minutes in milliseconds
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const ids = searchParams.get('ids');
@@ -9,6 +18,16 @@ export async function GET(request: Request) {
   }
 
   const airportIds = ids.split(',');
+
+   // Check cache first
+  const cacheKey = ids; // Use the IDs string as cache key
+  const cachedEntry = weatherCache.get(cacheKey);
+  const now = Date.now();
+
+  if (cachedEntry && (now - cachedEntry.timestamp) < CACHE_DURATION) {
+    console.log(`📦 Returning cached weather data for ${airportIds.length} airports: ${ids}`);
+    return NextResponse.json(cachedEntry.data);
+  }
 
   try {
     // Create AbortController for timeout
@@ -36,8 +55,14 @@ export async function GET(request: Request) {
 
     const data = await response.json();
 
+    // Cache the successful response
+    weatherCache.set(cacheKey, {
+      data,
+      timestamp: now,
+    });
+
     // Log successful request for debugging
-    console.log(`✅ Weather data fetched for ${airportIds.length} airports`);
+    console.log(`✅ Weather data fetched and cached for ${airportIds.length} airports`);
 
     return NextResponse.json(data);
   } catch (error) {

@@ -62,6 +62,9 @@ export default function AirportMap() {
     LIFR:true
   });
 
+  // Add this for forcing map remount in development
+  const [mapKey, setMapKey] = useState(0);
+
   // Handler to toggle Vis Filters
   const handleVisFilterChange = (category: string) => {
     console.log("you tried to change the vis filter");
@@ -83,6 +86,16 @@ export default function AirportMap() {
 
 
   useEffect(() => {
+
+    // Force remount MapComponent only in development when module is hot-replaced
+    if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+      const handleHotReload = () => setMapKey(prev => prev + 1);
+      // @ts-ignore - Next.js HMR API
+      if (module.hot) {
+        module.hot.addStatusHandler(handleHotReload);
+      }
+    }
+
     // Fetch real weather data for all airports
     const fetchWeatherData = async () => {
       try {
@@ -267,7 +280,9 @@ export default function AirportMap() {
         </label>
         
       </div>
+      {/*key="map" => to force a complete remount of the Leaflet map during a Next.js hot-reload */}
       <MapComponent
+        key={mapKey}
         airports={filteredAirports}
         selectedAirport={selectedAirport}
         onAirportSelect={setSelectedAirport}
