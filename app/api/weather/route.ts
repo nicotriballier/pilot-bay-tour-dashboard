@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 // In-memory cache with timestamps
 interface CacheEntry {
-  data: any;
+  data: unknown;
   timestamp: number;
 }
 

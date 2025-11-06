@@ -90,7 +90,7 @@ export default function AirportMap() {
     // Force remount MapComponent only in development when module is hot-replaced
     if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
       const handleHotReload = () => setMapKey(prev => prev + 1);
-      // @ts-ignore - Next.js HMR API
+      // @ts-expect-error - Next.js HMR API
       if (module.hot) {
         module.hot.addStatusHandler(handleHotReload);
       }
