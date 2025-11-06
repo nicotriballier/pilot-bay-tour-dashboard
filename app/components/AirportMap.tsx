@@ -92,6 +92,7 @@ export default function AirportMap() {
       const handleHotReload = () => setMapKey(prev => prev + 1);
       // @ts-expect-error - Next.js HMR API
       if (module.hot) {
+        // @ts-expect-error - Next.js HMR API
         module.hot.addStatusHandler(handleHotReload);
       }
     }
