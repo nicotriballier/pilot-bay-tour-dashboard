@@ -145,7 +145,7 @@ export default function AirportMap() {
                 .join('<br/>');
             }
             // Flight Categories VFR / MVFR
-            let flightCategory = metar.fltCat;
+            const flightCategory = metar.fltCat;
 
             // Handle wind - only if we have complete wind data
             let wind;
